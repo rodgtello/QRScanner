@@ -61,6 +61,9 @@ public class QRScannerView: UIView {
     @IBInspectable
     public var focusImageScale: CGFloat = 0.618
 
+    @IBInspectable
+    public var forcedOrientation: AVCaptureVideoOrientation?
+
     // MARK: - Public
 
     public func configure(delegate: QRScannerViewDelegate, input: Input = .default) {
@@ -300,6 +303,9 @@ public class QRScannerView: UIView {
             videoOrientation = .portraitUpsideDown
         default:
             videoOrientation = .portrait
+        }
+        if let forcedOrientation = forcedOrientation {
+            videoOrientation = forcedOrientation
         }
         self.previewLayer?.connection?.videoOrientation = videoOrientation
     }
