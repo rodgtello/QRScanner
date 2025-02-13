@@ -58,6 +58,9 @@ public class QRScannerView: UIView {
     @IBInspectable
     public var isBlurEffectEnabled: Bool = false
 
+    @IBInspectable
+    public var focusImageScale: CGFloat = 0.618
+
     // MARK: - Public
 
     public func configure(delegate: QRScannerViewDelegate, input: Input = .default) {
@@ -262,9 +265,10 @@ public class QRScannerView: UIView {
     }
 
     private func setupImageViews() {
-        let width = min(self.bounds.width, self.bounds.height) * 0.618
-        let x = (self.bounds.width > self.bounds.height) ? (self.bounds.width - width) / 2 : self.bounds.width * 0.191
-        let y = self.bounds.height * 0.191
+        let scaleNegative = (1 - focusImageScale ) / 2
+        let width = min(self.bounds.width, self.bounds.height) * focusImageScale
+        let x = (self.bounds.width > self.bounds.height) ? (self.bounds.width - width) / 2 : self.bounds.width * scaleNegative
+        let y = self.bounds.height * scaleNegative
         focusImageView = UIImageView(frame: CGRect(x: x, y: y, width: width, height: width))
         focusImageView.image = focusImage ?? UIImage(named: "scan_qr_focus", in: .module, compatibleWith: nil)
         addSubview(focusImageView)
