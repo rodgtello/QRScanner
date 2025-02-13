@@ -61,7 +61,6 @@ public class QRScannerView: UIView {
     @IBInspectable
     public var focusImageScale: CGFloat = 0.618
 
-    @IBInspectable
     public var forcedOrientation: AVCaptureVideoOrientation?
 
     // MARK: - Public
